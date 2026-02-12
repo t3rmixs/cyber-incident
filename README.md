@@ -29,4 +29,3 @@ Pentru fiecare incident înregistrat, se vor reține următoarele informații (e
 
 ---
 
-> **Notă Portofoliu:** Acest proiect demonstrează abilități de manipulare a datelor (CRUD), logică de sortare și aplicarea conceptelor de securitate cibernetică în dezvoltarea software.
