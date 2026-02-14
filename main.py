@@ -2,14 +2,22 @@
 incidente = []
 
 def citeste_nota_valida(mesaj):
+    """Cere o nota de la tastatura pana cand utilizatorul introduce ceva intre 1 si 10."""
+   
     while True:
-        nota = int(input(mesaj))
-        if 1 <= nota <= 10:
-            return nota
-        else:
-            print("Eroare: Introdu o nota intre 1 si 10 !")
+        verificare = input(mesaj)
 
+        if verificare.isdigit():
+            nota = int(verificare)
+            if 1 <= nota <= 10:
+                return nota
+            else:
+                print("Eroare: Introdu o nota intre 1 si 10 !")
+        else:
+            print("Eroare: Nu ai introdus un numar! Incearca din nou. ")
+            
 def adauga_incidente():
+    """Colecteaza datele pentru un nou incident, calculeaza media si il salveaza in lista."""
     print("Adauga incident nou: ")
     tip = input("Tip de atatc: ")
     analist = input("Analist responsabi: "  )
@@ -31,16 +39,19 @@ def adauga_incidente():
     print("\n Incident adaugat cu success!")
     
 def preia_tipul(incident):
+    """Functie ajutatoare pentru a extrage tipul incidentului (folosita la sortare)."""
     return incident['tip']
 
 def preia_scorul(incident):
+    """Functie ajutatoare pentru a extrage scorul incidentului (folosita la sortare)."""
     return incident['scor']
 
 def afisare_incidente():
+    """Afiseaza pe ecran toate incidentele salvate pana in prezent."""
     if not incidente:
         print("\n --> Sistemul nu are incidente ")
         return
-
+    
     print("\n --> Toate incidentele" )
     
     for inc in incidente:
@@ -50,6 +61,7 @@ def afisare_incidente():
 
 
 def modificare_incidente():
+    """Cauta un incident dupa numele analistului si permite editarea detaliilor acestuia."""
     nume = input("Intodu numele analistului: ")
 
     for inc in incidente:
@@ -65,6 +77,7 @@ def modificare_incidente():
     print("Eroare: Incidentul nu a fost gasit! ")
 
 def stergere_incidente():
+    """Cauta un incident dupa analist si il elimina definitiv din lista."""
     nume = input("Intodu numele analistului: ")
     for inc in incidente:
         if inc['analist'] == nume:
@@ -74,6 +87,7 @@ def stergere_incidente():
     print("Eroare: Incidentul nu a fost gasit!")
 
 def cauta_incidente():
+    """Cauta un incident anume folosind combinatia dintre numele analistului si tipul de atac."""
     analist_cautat = input("Introdu numele analistului cautat: ")
     tip_cautat = input("Introdu tipul de atac cautat: ")
     for inc in incidente:
@@ -84,6 +98,7 @@ def cauta_incidente():
 
 
 def incidente_critice():
+    """Filtreaza si afiseaza doar incidentele care au un scor de risc mai mare de 5."""
     print("\n --> Incidente critice Scor > 5 ")
     for inc in incidente:
         if inc['scor'] > 5:
@@ -91,12 +106,14 @@ def incidente_critice():
 
 
 def afisare_dupa_scor():
+    """Afiseaza incidentele sortate descrescator, de la cel mai mare risc la cel mai mic."""
     sortare = sorted(incidente, key=preia_scorul, reverse=True)
     print("\n --> incidente in ordinea scorului de risc ")
     for inc in sortare:
         print(f"Scor: {inc['scor']} | Atac : {inc['tip']}")
 
 def afisare_incidente_alfabetic():
+    """Afiseaza incidentele sortate alfabetic dupa tipul atacului."""
     sortate = sorted(incidente, key=preia_tipul)
 
     if not sortate:
@@ -134,5 +151,5 @@ while True :
     elif optiune == '8': 
         afisare_incidente_alfabetic()
     else:
-        print("Optiune invalida!")
+        print("Optiune invalida! Te rog selecteaza una din optiuniile de mai sus!")
     
